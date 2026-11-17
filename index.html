@@ -83,7 +83,7 @@ src="https://www.facebook.com/tr?id=246033433475773&ev=PageView&noscript=1"
 
       <label for="whats">Seu WhatsApp (com DDD)</label>
       <input type="tel" id="whats" name="whats" autocomplete="tel" inputmode="numeric" placeholder="(31) 99999-9999" maxlength="16">
-      <div class="ajuda">É por aqui que você vai receber o link.</div>
+      <div class="ajuda">Com DDD e o 9 na frente. É por aqui que você vai receber o link.</div>
 
       <label>Você já é aluna da Assinatura de Moldes?</label>
       <div class="opcoes">
@@ -154,7 +154,7 @@ src="https://www.facebook.com/tr?id=246033433475773&ev=PageView&noscript=1"
     const numero = whats.value.replace(/\D/g, "");
     const plano = (form.querySelector('input[name="plano"]:checked') || {}).value;
     if (nome.length < 2) return mostraErro("Escreva o seu nome, por favor.");
-    if (numero.length < 10 || numero.length > 11) return mostraErro("Confira o seu WhatsApp. Ele precisa ter o DDD, por exemplo: (31) 99999-9999.");
+    if (numero.length !== 11 || numero[2] !== "9") return mostraErro("Confira o seu WhatsApp. Ele precisa ter o DDD e o 9 na frente, por exemplo: (31) 99999-9999.");
     if (!plano) return mostraErro("Marque se você já é aluna da assinatura.");
     btn.disabled = true; btn.textContent = "Enviando…";
     const { error } = await sb.from("lista_espera").insert({ nome, whatsapp: numero, plano_atual: plano });
